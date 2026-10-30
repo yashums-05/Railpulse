@@ -1,0 +1,1 @@
+export default function TrainOccupancyChart(){return <div>Train Chart</div>}

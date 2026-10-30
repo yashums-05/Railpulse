@@ -1,0 +1,1 @@
+export default function CrowdDashboard(){return <div>Crowd Dashboard</div>}

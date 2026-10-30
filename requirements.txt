@@ -1,0 +1,123 @@
+# =============================================================
+# RailPulse — Full Project Requirements
+# =============================================================
+# This file lists all dependencies for both the backend (Node.js)
+# and frontend (React) parts of the RailPulse application.
+# =============================================================
+
+
+# =============================================================
+# SYSTEM REQUIREMENTS
+# =============================================================
+# - Node.js       >= 18.x       https://nodejs.org/
+# - npm           >= 9.x        (bundled with Node.js)
+# - PostgreSQL    >= 14.x       https://www.postgresql.org/
+# - Git           (optional)    https://git-scm.com/
+
+
+# =============================================================
+# BACKEND DEPENDENCIES  (backend/package.json)
+# =============================================================
+# Install with: cd backend && npm install
+# -------------------------------------------------------------
+
+# Web Framework
+express@^4.18.2                  # Fast, minimalist web framework for Node.js
+
+# Database
+pg@^8.11.3                       # PostgreSQL client for Node.js (node-postgres)
+
+# Authentication & Security
+bcryptjs@^2.4.3                  # Password hashing using bcrypt algorithm
+jsonwebtoken@^9.0.2              # JSON Web Token (JWT) creation and verification
+
+# File Uploads
+multer@^2.1.1                    # Middleware for handling multipart/form-data (image uploads)
+
+# Utilities
+cors@^2.8.5                      # Enable Cross-Origin Resource Sharing (CORS)
+dotenv@^16.3.1                   # Load environment variables from .env file
+
+
+# =============================================================
+# FRONTEND DEPENDENCIES  (frontend/package.json)
+# =============================================================
+# Install with: cd frontend && npm install
+# -------------------------------------------------------------
+
+# Core UI
+react@^18.2.0                    # React UI library
+react-dom@^18.2.0                # React DOM renderer for web
+
+# Routing
+react-router-dom@^7.13.1         # Declarative client-side routing for React
+
+# HTTP Client
+axios@^1.5.0                     # Promise-based HTTP client for API requests
+
+# Data Visualization
+recharts@^3.8.0                  # Composable charting library built on React + D3
+
+# Build Tooling (devDependency)
+react-scripts@^5.0.1             # Create React App scripts for development & build
+
+
+# =============================================================
+# DATABASE SETUP (PostgreSQL)
+# =============================================================
+# Run these SQL files in order against your 'railpulse' database:
+#
+#   1. database/schema.sql              -- Creates all tables
+#   2. database/add_stations_trains.sql -- Seeds stations & train_details
+#   3. database/add_train_stops.sql     -- Seeds train stop schedules
+#   4. database/add_username.sql        -- Adds username column to users (migration)
+#
+# Commands:
+#   psql -U postgres -d railpulse -f database/schema.sql
+#   psql -U postgres -d railpulse -f database/add_stations_trains.sql
+#   psql -U postgres -d railpulse -f database/add_train_stops.sql
+#   psql -U postgres -d railpulse -f database/add_username.sql
+#
+# NOTE: If setting up fresh, the schema.sql already includes the username column.
+#       The add_username.sql migration is only needed for existing databases.
+
+
+# =============================================================
+# USER ROLES SUPPORTED
+# =============================================================
+#
+#   Passenger         -- Files complaints, views own complaints, crowd monitoring
+#   Admin             -- Full access: all complaints, system overview
+#   Station Master    -- Station-type complaints only
+#   TT                -- Train-type complaints only (Ticket Examiner)
+#   Loco Pilot        -- Train-type complaints only
+#   Guard             -- Train-type complaints only
+#   RPF Officer       -- All complaint types (Railway Protection Force)
+#   Section Engineer  -- Station-type complaints only
+#
+# Login Credential: username (unique User ID set at registration) + password
+
+
+# =============================================================
+# ENVIRONMENT VARIABLES REQUIRED
+# =============================================================
+# 1. Copy .env.example to .env
+# 2. Update DATABASE_URL with your local PostgreSQL credentials:
+#
+#    DATABASE_URL=postgresql://<user>:<password>@localhost:5432/railpulse
+#    JWT_SECRET=any_strong_random_string
+#
+# The backend reads this file via dotenv.
+# Frontend API calls default to http://localhost:5000
+
+
+# =============================================================
+# NPM SCRIPTS
+# =============================================================
+#
+# Backend:
+#   npm start               → node server.js  (port 5000)
+#
+# Frontend:
+#   npm start               → react-scripts start  (port 3000)
+#   npm run build           → Production build (optional)
